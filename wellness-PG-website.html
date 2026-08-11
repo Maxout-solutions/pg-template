@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wellness Hostel — Student PG Accommodation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#233522;
+    --cream:#FBF7EF;
+    --paper:#F3EEE0;
+    --moss:#4C6B4A;
+    --moss-dark:#37502F;
+    --gold:#C79A3C;
+    --clay:#AD5F30;
+    --line:#DED4B8;
+    --white:#FFFFFF;
+    --radius:14px;
+    --shadow: 0 10px 30px rgba(35,53,34,0.08);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    margin:0 0 .4em;
+    font-weight:600;
+    color:var(--moss-dark);
+    letter-spacing:-0.01em;
+  }
+  p{margin:0 0 1em;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:.72rem;
+    font-weight:600;
+    color:var(--clay);
+    margin-bottom:.6em;
+    display:inline-block;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 26px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:.95rem;
+    text-decoration:none;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+  .btn-primary{background:var(--moss-dark);color:var(--cream);}
+  .btn-primary:hover{box-shadow:0 8px 20px rgba(55,80,47,.35);}
+  .btn-ghost{background:transparent;border-color:var(--moss-dark);color:var(--moss-dark);}
+  .btn-gold{background:var(--gold);color:var(--ink);}
+  .btn-gold:hover{box-shadow:0 8px 20px rgba(199,154,60,.4);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,247,239,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:16px;padding-bottom:16px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--moss-dark);text-decoration:none;}
+  .brand-mark{
+    width:34px;height:34px;border-radius:10px;background:var(--moss-dark);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);
+    font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;
+  }
+  .nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-weight:500;font-size:.93rem;}
+  .nav-links a{text-decoration:none;color:var(--ink);opacity:.8;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{display:flex;align-items:center;gap:12px;}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .menu-toggle span{display:block;width:24px;height:2px;background:var(--ink);margin:5px 0;}
+
+  @media (max-width:860px){
+    .nav-links{
+      position:fixed;inset:64px 0 0 0;background:var(--cream);
+      flex-direction:column;padding:32px 24px;gap:22px;font-size:1.1rem;
+      transform:translateY(-110%);transition:transform .3s ease;
+      border-top:1px solid var(--line);
+    }
+    .nav-links.open{transform:translateY(0);}
+    .menu-toggle{display:block;}
+    .nav-cta .btn-ghost{display:none;}
+  }
+
+  /* ---------- FESTOON DIVIDER (signature element) ---------- */
+  .festoon{
+    height:26px;
+    display:flex;justify-content:center;align-items:flex-start;
+    overflow:hidden;
+    background:var(--paper);
+  }
+  .festoon svg{display:block;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--paper);
+    padding:56px 0 0;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;
+    padding-bottom:56px;
+  }
+  .hero h1{font-size:clamp(2.1rem,4.2vw,3.4rem);line-height:1.06;margin-bottom:.35em;}
+  .hero h1 em{font-style:normal;color:var(--clay);}
+  .hero-sub{font-size:1.08rem;max-width:46ch;color:#3d4f3a;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px;}
+  .hero-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;}
+  .tag{
+    font-size:.78rem;font-weight:600;padding:7px 14px;border-radius:999px;
+    background:var(--white);border:1px solid var(--line);color:var(--moss-dark);
+  }
+  .hero-photo{
+    position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);
+    aspect-ratio:4/5;
+  }
+  .hero-photo img{width:100%;height:100%;object-fit:cover;}
+  .hero-photo-badge{
+    position:absolute;left:18px;bottom:18px;background:var(--white);
+    padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);
+    font-family:'Fraunces',serif;font-size:.9rem;font-weight:600;color:var(--moss-dark);
+  }
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-photo{order:-1;aspect-ratio:16/10;}
+  }
+
+  section{padding:76px 0;}
+  .section-head{max-width:640px;margin-bottom:44px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.3rem);}
+  .section-alt{background:var(--paper);}
+
+  /* ---------- WHY / QUICK FACTS ---------- */
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .fact-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 20px;text-align:left;
+  }
+  .fact-card .ico{width:36px;height:36px;margin-bottom:14px;color:var(--moss);}
+  .fact-card h4{font-size:1.02rem;margin-bottom:.3em;}
+  .fact-card p{font-size:.9rem;color:#5a6656;margin:0;}
+  @media (max-width:860px){.facts{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.facts{grid-template-columns:1fr;}}
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:14px;
+  }
+  .gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:12px;}
+  .gallery-grid .g1{grid-column:span 2;grid-row:span 2;}
+  .gallery-grid .g4{grid-column:span 2;}
+  @media (max-width:700px){
+    .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:120px;}
+    .gallery-grid .g1{grid-column:span 2;grid-row:span 2;}
+    .gallery-grid .g4{grid-column:span 2;}
+  }
+
+  /* ---------- ROOMS ---------- */
+  .rooms-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .room-card{
+    background:var(--white);border-radius:var(--radius);overflow:hidden;
+    border:1px solid var(--line);box-shadow:var(--shadow);
+  }
+  .room-card img{height:200px;object-fit:cover;}
+  .room-body{padding:24px;}
+  .room-body h3{font-size:1.25rem;margin-bottom:.2em;}
+  .price{font-family:'Fraunces',serif;font-size:1.9rem;color:var(--clay);margin:.2em 0 .1em;}
+  .price span{font-family:'Work Sans',sans-serif;font-size:.85rem;color:#7a8574;font-weight:500;}
+  .sample-tag{
+    display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--clay);background:#F7E9DA;
+    padding:3px 9px;border-radius:6px;margin-bottom:10px;
+  }
+  .room-feats{list-style:none;padding:0;margin:14px 0 0;font-size:.88rem;color:#4a5847;}
+  .room-feats li{padding:5px 0;display:flex;gap:8px;align-items:center;}
+  .room-feats li svg{width:15px;height:15px;color:var(--moss);flex-shrink:0;}
+  @media (max-width:700px){.rooms-grid{grid-template-columns:1fr;}}
+
+  /* ---------- MENU / FOOD ---------- */
+  .menu-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+  .menu-table{width:100%;border-collapse:collapse;background:var(--white);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);}
+  .menu-table th, .menu-table td{padding:14px 18px;text-align:left;font-size:.9rem;}
+  .menu-table th{background:var(--moss-dark);color:var(--cream);font-weight:600;}
+  .menu-table tr:nth-child(even) td{background:#F8F5EA;}
+  .delivery-box{
+    background:var(--moss-dark);color:var(--cream);border-radius:var(--radius);
+    padding:30px;
+  }
+  .delivery-box h3{color:var(--cream);}
+  .delivery-box p{color:#DCE4D6;font-size:.94rem;}
+  @media (max-width:860px){.menu-layout{grid-template-columns:1fr;}}
+
+  /* ---------- STUDY ROOM ---------- */
+  .study-block{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  .study-block img{border-radius:18px;box-shadow:var(--shadow);}
+  @media (max-width:860px){.study-block{grid-template-columns:1fr;}}
+
+  /* ---------- AMENITIES ---------- */
+  .amenities-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:16px;
+  }
+  .amenity{
+    background:var(--white);border:1px solid var(--line);border-radius:12px;
+    padding:20px 14px;text-align:center;font-size:.85rem;font-weight:600;color:#3d4a3a;
+  }
+  .amenity svg{width:26px;height:26px;color:var(--gold);margin:0 auto 10px;display:block;}
+  @media (max-width:860px){.amenities-grid{grid-template-columns:repeat(3,1fr);}}
+  @media (max-width:520px){.amenities-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* ---------- CULTURE ---------- */
+  .culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .culture-card{border-radius:var(--radius);overflow:hidden;background:var(--white);border:1px solid var(--line);}
+  .culture-card img{height:190px;object-fit:cover;}
+  .culture-body{padding:20px;}
+  .culture-body .eyebrow{margin-bottom:.3em;}
+  .culture-body p{font-size:.9rem;color:#57624f;margin:0;}
+  @media (max-width:860px){.culture-grid{grid-template-columns:1fr;}}
+
+  /* ---------- BOOK VISIT CTA ---------- */
+  .cta-band{
+    background:var(--moss-dark);color:var(--cream);text-align:center;
+    padding:72px 24px;border-radius:24px;margin:0 24px;
+  }
+  .cta-band h2{color:var(--cream);font-size:clamp(1.6rem,3.4vw,2.4rem);}
+  .cta-band p{color:#D8E1D2;max-width:52ch;margin:0 auto 28px;}
+  .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  .contact-list{list-style:none;padding:0;margin:0;}
+  .contact-list li{
+    display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line);
+  }
+  .contact-list li:last-child{border-bottom:none;}
+  .contact-list .ico-wrap{
+    width:40px;height:40px;border-radius:10px;background:var(--paper);
+    display:flex;align-items:center;justify-content:center;color:var(--moss-dark);flex-shrink:0;
+  }
+  .contact-list strong{display:block;font-size:.95rem;}
+  .contact-list span{font-size:.85rem;color:#5a6656;}
+  .map-placeholder{
+    border-radius:var(--radius);border:1.5px dashed var(--line);background:var(--paper);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    min-height:280px;color:#7a8574;text-align:center;padding:24px;
+  }
+  .map-placeholder svg{width:40px;height:40px;margin-bottom:10px;color:var(--clay);}
+  @media (max-width:860px){.contact-layout{grid-template-columns:1fr;}}
+
+  footer{
+    background:var(--ink);color:#C9D1C2;padding:48px 0 28px;margin-top:60px;
+  }
+  .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;padding-bottom:24px;border-bottom:1px solid #3a4a37;}
+  .footer-brand{font-family:'Fraunces',serif;color:var(--cream);font-size:1.2rem;font-weight:700;}
+  .footer-note{font-size:.82rem;color:#8fa088;margin-top:20px;}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- WHATSAPP ICON ---------- */
+  .wa-icon{width:18px;height:18px;flex-shrink:0;}
+
+  /* ---------- CLEAN "PHOTO COMING SOON" PLACEHOLDER ---------- */
+  .img-placeholder{
+    width:100%;height:100%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    background:repeating-linear-gradient(135deg, var(--paper), var(--paper) 14px, #ECE4CE 14px, #ECE4CE 28px);
+    border:1.5px dashed var(--line);color:var(--clay);text-align:center;padding:16px;box-sizing:border-box;
+  }
+  .img-placeholder svg{width:30px;height:30px;opacity:.75;}
+  .img-placeholder span{font-size:.78rem;font-weight:700;letter-spacing:.02em;max-width:22ch;line-height:1.4;}
+  .slider-track .img-placeholder{height:440px;}
+  .room-card .img-placeholder{height:200px;}
+  @media (max-width:700px){.slider-track .img-placeholder{height:280px;}}
+
+  /* ---------- IMAGE SLIDER ---------- */
+  .slider{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+  .slider-track{display:flex;transition:transform .5s ease;}
+  .slider-track img{width:100%;flex:0 0 100%;height:440px;object-fit:cover;}
+  .slider-caption{
+    position:absolute;left:18px;bottom:44px;background:rgba(35,53,34,.78);color:var(--cream);
+    padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600;
+  }
+  .slider-nav{
+    position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);
+    border:none;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;box-shadow:var(--shadow);color:var(--moss-dark);
+  }
+  .slider-nav:hover{background:var(--white);}
+  .slider-prev{left:16px;}
+  .slider-next{right:16px;}
+  .slider-dots{display:flex;gap:8px;justify-content:center;margin-top:16px;}
+  .slider-dot{width:9px;height:9px;border-radius:50%;background:var(--line);border:none;cursor:pointer;padding:0;}
+  .slider-dot.active{background:var(--clay);}
+  @media (max-width:700px){.slider-track img{height:280px;}}
+
+  /* ---------- FOOD SHOWCASE ---------- */
+  .food-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px;}
+  .food-grid img{height:170px;object-fit:cover;border-radius:12px;}
+  @media (max-width:700px){.food-grid{grid-template-columns:repeat(2,1fr);}}
+  .food-caption{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 30px;text-align:center;font-family:'Fraunces',serif;font-size:1.15rem;
+    color:var(--moss-dark);max-width:680px;margin:0 auto;line-height:1.5;
+  }
+
+  /* ---------- CALL TOOLTIP (desktop) ---------- */
+  .call-tip{
+    position:fixed;z-index:999;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
+    background:var(--white);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:14px;
+    padding:16px 20px;display:flex;align-items:center;gap:14px;font-size:.9rem;
+    opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease;
+  }
+  .call-tip.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+  .call-tip strong{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--moss-dark);}
+  .call-tip button{
+    background:var(--moss-dark);color:var(--cream);border:none;border-radius:999px;
+    padding:8px 16px;font-size:.8rem;font-weight:600;cursor:pointer;white-space:nowrap;
+  }
+  .call-tip .call-tip-close{background:none;color:var(--clay);padding:4px;}
+
+  /* ---------- CONTACT FORM ---------- */
+  .contact-form{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;box-shadow:var(--shadow);
+  }
+  .contact-form label{display:block;font-size:.8rem;font-weight:700;margin-bottom:6px;color:var(--moss-dark);}
+  .contact-form input, .contact-form textarea{
+    width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:10px;
+    font-family:'Work Sans',sans-serif;font-size:.92rem;margin-bottom:16px;background:var(--cream);color:var(--ink);
+  }
+  .contact-form textarea{min-height:100px;resize:vertical;}
+  .contact-form input:focus, .contact-form textarea:focus{outline:2px solid var(--gold);border-color:transparent;}
+  .form-status{font-size:.85rem;margin-top:6px;min-height:1.2em;}
+  .form-status.ok{color:var(--moss-dark);font-weight:600;}
+  .form-status.err{color:var(--clay);font-weight:600;}
+
+  /* ---------- MAP EMBED ---------- */
+  .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);min-height:280px;}
+  .map-embed iframe{width:100%;height:100%;min-height:280px;border:0;display:block;}
+
+  /* ---------- MINI ABOUT + CONTACT (footer strip) ---------- */
+  .mini-info{background:var(--paper);padding:64px 0;border-top:1px solid var(--line);}
+  .mini-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .mini-info h3{font-size:1.5rem;margin-bottom:.5em;}
+  .mini-info p{color:#57624f;font-size:.95rem;max-width:48ch;}
+  .mini-brand{display:flex;align-items:center;gap:10px;margin-top:18px;font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;color:var(--moss-dark);}
+  .mini-info address{font-style:normal;color:#57624f;font-size:.95rem;line-height:1.75;}
+  .mini-info .show-map-link{
+    display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-weight:700;font-size:.78rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--clay);text-decoration:none;
+  }
+  @media (max-width:860px){.mini-info-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="brand"><span class="brand-mark">W</span> Wellness Hostel</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#rooms">Rooms &amp; Pricing</a></li>
+      <li><a href="#menu">Food</a></li>
+      <li><a href="#amenities">Amenities</a></li>
+      <li><a href="#culture">Community</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#book" class="btn btn-ghost" style="padding:10px 20px;">Book a visit</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:56px;">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Women's PG · AC &amp; Non-AC</span>
+        <h1>A women's PG run around<br>how students <em>actually</em> live.</h1>
+        <p class="hero-sub">Wellness Hostel is safe, women-only student housing built for the daily grind — reliable WiFi for the 2am submission, a quiet workspace, food that shows up on time, and a home that still feels lived-in during Diwali and Ganesh Chaturthi.</p>
+        <div class="hero-actions">
+          <a href="#book" class="btn btn-primary">Book a visit</a>
+          <a href="https://wa.me/919391105359" class="btn btn-ghost">
+            <svg class="wa-icon" viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.71 4.61 1.929 6.473L4.5 28.5l7.187-1.885A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3Zm6.98 16.61c-.29.82-1.44 1.5-2.36 1.7-.63.13-1.45.24-4.22-.9-3.54-1.46-5.82-5.06-6-5.3-.17-.24-1.44-1.92-1.44-3.66 0-1.74.9-2.6 1.23-2.95.29-.32.65-.4.87-.4.22 0 .43 0 .62.01.2.01.47-.08.73.56.29.68.97 2.36 1.06 2.53.09.17.15.37.03.6-.11.24-.17.38-.34.58-.17.2-.36.45-.51.6-.17.17-.35.35-.15.7.2.34.88 1.45 1.9 2.35 1.31 1.16 2.41 1.53 2.76 1.7.36.17.57.15.78-.09.21-.24.9-1.04 1.13-1.4.24-.35.48-.29.8-.17.32.11 2.02.95 2.37 1.13.34.17.57.26.65.4.09.15.09.85-.2 1.67Z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+        <div class="hero-tags">
+          <span class="tag">Women Only</span>
+          <span class="tag">High-speed WiFi</span>
+          <span class="tag">Study Room</span>
+          <span class="tag">Gym Access</span>
+          <span class="tag">Near Colleges</span>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="8" cy="10" r="1.6"/><path d="m21 15-5-5-9 9"/></svg>
+          <span>Building exterior photo goes here</span>
+        </div>
+        <div class="hero-photo-badge">Add area / landmark here</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="festoon" aria-hidden="true">
+    <svg width="100%" height="26" viewBox="0 0 1160 26" preserveAspectRatio="none">
+      <path d="M0,0 Q29,26 58,0 T116,0 T174,0 T232,0 T290,0 T348,0 T406,0 T464,0 T522,0 T580,0 T638,0 T696,0 T754,0 T812,0 T870,0 T928,0 T986,0 T1044,0 T1102,0 T1160,0" fill="none" stroke="#C79A3C" stroke-width="2" opacity="0.55"/>
+      <g fill="#AD5F30">
+        <circle cx="29" cy="13" r="3.5"/><circle cx="87" cy="13" r="3.5"/><circle cx="145" cy="13" r="3.5"/>
+        <circle cx="203" cy="13" r="3.5"/><circle cx="261" cy="13" r="3.5"/><circle cx="319" cy="13" r="3.5"/>
+        <circle cx="377" cy="13" r="3.5"/><circle cx="435" cy="13" r="3.5"/><circle cx="493" cy="13" r="3.5"/>
+        <circle cx="551" cy="13" r="3.5"/><circle cx="609" cy="13" r="3.5"/><circle cx="667" cy="13" r="3.5"/>
+        <circle cx="725" cy="13" r="3.5"/><circle cx="783" cy="13" r="3.5"/><circle cx="841" cy="13" r="3.5"/>
+        <circle cx="899" cy="13" r="3.5"/><circle cx="957" cy="13" r="3.5"/><circle cx="1015" cy="13" r="3.5"/>
+        <circle cx="1073" cy="13" r="3.5"/><circle cx="1131" cy="13" r="3.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- QUICK FACTS -->
+  <section>
+    <div class="wrap">
+      <div class="facts reveal">
+        <div class="fact-card">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="9" width="18" height="11" rx="2"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg>
+          <h4>Student-friendly</h4>
+          <p>Flexible move-in, no unnecessary paperwork, and a warden who actually picks up the phone.</p>
+        </div>
+        <div class="fact-card">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 20h10M9 4v14M15 4v14"/></svg>
+          <h4>Study room on-site</h4>
+          <p>A dedicated quiet workspace — separate from the room, for when the room isn't quiet enough.</p>
+        </div>
+        <div class="fact-card">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z"/><path d="M12 8v4l3 2"/></svg>
+          <h4>Meals delivered to college</h4>
+          <p>Lunch and dinner delivery to nearby colleges, for the days you can't make it back in time.</p>
+        </div>
+        <div class="fact-card">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7l-9-5Z"/></svg>
+          <h4>Safe &amp; supervised</h4>
+          <p>In-room lockers, power backup, and staff on-site — the details parents ask about first.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="section-alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Take a look around</span>
+        <h2>Gallery</h2>
+        <p>A look at the workspace, gym, and dining area. <em style="font-style:normal;color:var(--clay);">Room-interior photos still needed — swap the first slide once you send them.</em></p>
+      </div>
+      <div class="slider reveal">
+        <div class="slider-track">
+          <div style="position:relative;">
+            <div class="img-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+              <span>Room interior photo goes here</span>
+            </div>
+            <span class="slider-caption">Rooms — add real photo</span>
+          </div>
+          <div style="position:relative;">
+            <img src="images/study-workspace.jpg" alt="Study workspace with desks and shelves">
+            <span class="slider-caption">Study Workspace</span>
+          </div>
+          <div style="position:relative;">
+            <img src="images/gym.jpg" alt="In-house gym">
+            <span class="slider-caption">Gym</span>
+          </div>
+          <div style="position:relative;">
+            <img src="images/dining-area.jpg" alt="Dining area">
+            <span class="slider-caption">Dining Area</span>
+          </div>
+        </div>
+        <button class="slider-nav slider-prev" aria-label="Previous slide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="slider-nav slider-next" aria-label="Next slide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="slider-dots"></div>
+    </div>
+  </section>
+
+  <!-- ROOMS & PRICING -->
+  <section id="rooms">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Rooms</span>
+        <h2>Pick your room type</h2>
+        <p>WhatsApp our executive for current rates and availability.</p>
+      </div>
+      <div class="rooms-grid reveal">
+        <div class="room-card">
+          <div class="img-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            <span>AC room photo goes here</span>
+          </div>
+          <div class="room-body">
+            <h3>AC Room</h3>
+            <ul class="room-feats">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Air conditioning</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Single bed, personal storage</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Attached / shared washroom</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> High-speed WiFi included</li>
+            </ul>
+            <a href="https://wa.me/919391105359" class="btn btn-ghost" style="margin-top:16px;padding:10px 20px;font-size:.85rem;">Ask about rates</a>
+          </div>
+        </div>
+        <div class="room-card">
+          <div class="img-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            <span>Non-AC room photo goes here</span>
+          </div>
+          <div class="room-body">
+            <h3>Non-AC Room</h3>
+            <ul class="room-feats">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Well-ventilated, ceiling fan</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Single bed, personal storage</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Attached / shared washroom</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> High-speed WiFi included</li>
+            </ul>
+            <a href="https://wa.me/919391105359" class="btn btn-ghost" style="margin-top:16px;padding:10px 20px;font-size:.85rem;">Ask about rates</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU / FOOD -->
+  <section id="menu" class="section-alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Food</span>
+        <h2>Meals made to actually keep you going</h2>
+      </div>
+      <div class="reveal" style="margin-bottom:36px;">
+        <img src="images/food-thali.jpg" alt="Wholesome thali meal served at Wellness Hostel" style="width:100%;max-height:460px;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow);">
+      </div>
+      <div class="food-caption reveal">"We provide delicious, healthy food three times a day, along with evening snacks."</div>
+      <div class="delivery-box reveal" style="margin-top:40px;">
+        <h3>Meals delivered to your institute</h3>
+        <p>Save your time to focus on studies — we bring your meals directly to your institute. Just let the mess in-charge know a day ahead.</p>
+        <a href="https://wa.me/919391105359" class="btn btn-gold" style="margin-top:8px;">Ask about delivery</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDY ROOM -->
+  <section>
+    <div class="wrap">
+      <div class="study-block reveal">
+        <img src="images/study-workspace.jpg" alt="Study workspace with desks and shelves">
+        <div>
+          <span class="eyebrow">Workspace</span>
+          <h2>A study room that's actually quiet</h2>
+          <p>A separate workspace on the premises — good lighting, table seating, and WiFi that holds up when the whole floor is on a call at once. Built for the nights before an exam, not just for show.</p>
+          <a href="#book" class="btn btn-primary">Ask to see it</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMENITIES -->
+  <section id="amenities" class="section-alt">
+    <div class="wrap">
+      <div class="section-head center reveal" style="margin-left:auto;margin-right:auto;">
+        <span class="eyebrow">Everything included</span>
+        <h2>Amenities</h2>
+      </div>
+      <div class="amenities-grid reveal">
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h16M4 12a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4M6 12v6M18 12v6"/></svg>Breakfast</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v4H4zM6 8v12h12V8"/></svg>Daily Cleaning</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9h18l-1.5 10.5a2 2 0 0 1-2 1.5H6.5a2 2 0 0 1-2-1.5L3 9Z M8 9V6a4 4 0 0 1 8 0v3"/></svg>Grocery Shop Nearby</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12a10 10 0 0 1 20 0M6 12a6 6 0 0 1 12 0M12 12v6"/></svg>High-Speed WiFi</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10l8-6 8 6v10M9 20v-6h6v6"/></svg>Kitchen Access</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M7 6V4h10v2"/></svg>Living Room</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="7" width="10" height="12" rx="1"/><path d="M14 10h3l3 3v6h-6"/><circle cx="8" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg>Luggage Storage</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>Power Backup</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 11h14M9 6h.01M9 16h.01"/></svg>Refrigerator</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>Personal Safe</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3v3M10 3v2M14 3v3M8 8h9a3 3 0 0 1 0 6H8a5 5 0 0 1 0-10Z"/><path d="M8 14v3a3 3 0 0 0 6 0v-3"/></svg>Hot Shower</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Single Bed</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10h13v5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-5Z M17 11h1.5a2 2 0 0 1 0 4H17 M8 3c-1 1.5.5 1.5-.5 3M12 3c-1 1.5.5 1.5-.5 3"/></svg>Tea / Coffee</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="13" r="6"/><circle cx="12" cy="13" r="2.4"/><path d="M8 4h8l1 3H7z"/></svg>Washing Machine</div>
+        <div class="amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6.5 6.5 12 2l5.5 4.5M4 10v9a1 1 0 0 0 1 1h4v-6h6v6h4a1 1 0 0 0 1-1v-9"/></svg>Gym Access</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CULTURE / COMMUNITY -->
+  <section id="culture">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Life at Wellness Hostel</span>
+        <h2>A hostel that still celebrates like home</h2>
+        <p>Living away from family doesn't mean skipping the festivals. Here's a look at how the community comes together through the year.</p>
+      </div>
+      <div class="culture-grid reveal">
+        <div class="culture-card">
+          <img src="images/ganesh-chaturthi.jpg" alt="Residents celebrating Ganesh Chaturthi at Wellness Hostel">
+          <div class="culture-body">
+            <span class="eyebrow">Ganesh Chaturthi</span>
+            <p>The common room turns into a small pandal every year — residents pitch in for decorations and modaks, then walk the visarjan together.</p>
+          </div>
+        </div>
+        <div class="culture-card">
+          <img src="images/diwali.jpg" alt="Residents celebrating Diwali with diyas and rangoli at Wellness Hostel">
+          <div class="culture-body">
+            <span class="eyebrow">Diwali</span>
+            <p>Diyas along every corridor, a shared dinner, and a night that makes being away from home feel a little less far.</p>
+          </div>
+        </div>
+        <div class="culture-card">
+          <img src="images/sankranti.jpg" alt="Residents celebrating Sankranti at Wellness Hostel">
+          <div class="culture-body">
+            <span class="eyebrow">Sankranti &amp; more</span>
+            <p>From kite flying on the terrace to festive get-togethers through the year — the celebrations here don't stop just because home is a little farther away.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="festoon" aria-hidden="true">
+    <svg width="100%" height="26" viewBox="0 0 1160 26" preserveAspectRatio="none">
+      <path d="M0,0 Q29,26 58,0 T116,0 T174,0 T232,0 T290,0 T348,0 T406,0 T464,0 T522,0 T580,0 T638,0 T696,0 T754,0 T812,0 T870,0 T928,0 T986,0 T1044,0 T1102,0 T1160,0" fill="none" stroke="#C79A3C" stroke-width="2" opacity="0.55"/>
+      <g fill="#AD5F30">
+        <circle cx="29" cy="13" r="3.5"/><circle cx="87" cy="13" r="3.5"/><circle cx="145" cy="13" r="3.5"/>
+        <circle cx="203" cy="13" r="3.5"/><circle cx="261" cy="13" r="3.5"/><circle cx="319" cy="13" r="3.5"/>
+        <circle cx="377" cy="13" r="3.5"/><circle cx="435" cy="13" r="3.5"/><circle cx="493" cy="13" r="3.5"/>
+        <circle cx="551" cy="13" r="3.5"/><circle cx="609" cy="13" r="3.5"/><circle cx="667" cy="13" r="3.5"/>
+        <circle cx="725" cy="13" r="3.5"/><circle cx="783" cy="13" r="3.5"/><circle cx="841" cy="13" r="3.5"/>
+        <circle cx="899" cy="13" r="3.5"/><circle cx="957" cy="13" r="3.5"/><circle cx="1015" cy="13" r="3.5"/>
+        <circle cx="1073" cy="13" r="3.5"/><circle cx="1131" cy="13" r="3.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- BOOK VISIT -->
+  <section id="book">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <span class="eyebrow" style="color:var(--gold);">Book a visit</span>
+        <h2>See the rooms before you decide</h2>
+        <p>Slots are booked through our executive — no online payment needed to visit. Just reach out and we'll lock in a time that works.</p>
+        <div class="cta-actions">
+          <a href="https://wa.me/919391105359" class="btn btn-gold">
+            <svg class="wa-icon" viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.71 4.61 1.929 6.473L4.5 28.5l7.187-1.885A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3Zm6.98 16.61c-.29.82-1.44 1.5-2.36 1.7-.63.13-1.45.24-4.22-.9-3.54-1.46-5.82-5.06-6-5.3-.17-.24-1.44-1.92-1.44-3.66 0-1.74.9-2.6 1.23-2.95.29-.32.65-.4.87-.4.22 0 .43 0 .62.01.2.01.47-.08.73.56.29.68.97 2.36 1.06 2.53.09.17.15.37.03.6-.11.24-.17.38-.34.58-.17.2-.36.45-.51.6-.17.17-.35.35-.15.7.2.34.88 1.45 1.9 2.35 1.31 1.16 2.41 1.53 2.76 1.7.36.17.57.15.78-.09.21-.24.9-1.04 1.13-1.4.24-.35.48-.29.8-.17.32.11 2.02.95 2.37 1.13.34.17.57.26.65.4.09.15.09.85-.2 1.67Z"/></svg>
+            WhatsApp us to book
+          </a>
+          <a href="tel:+919391105359" class="btn btn-ghost call-link" data-number="+91 93911 05359" style="border-color:var(--cream);color:var(--cream);">Call our executive</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section-alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Get in touch</span>
+        <h2>Contact &amp; Location</h2>
+      </div>
+      <div class="contact-layout reveal">
+        <div>
+          <ul class="contact-list">
+            <li>
+              <span class="ico-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v10Z"/></svg></span>
+              <div><strong>WhatsApp</strong><span>+91 93911 05359 — fastest way to reach us</span></div>
+            </li>
+            <li>
+              <span class="ico-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5Z"/></svg></span>
+              <div><strong>Phone</strong><span>+91 93911 05359</span></div>
+            </li>
+            <li>
+              <span class="ico-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+              <div><strong>Email</strong><span>hello@wellnesshostel.example</span></div>
+            </li>
+            <li>
+              <span class="ico-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12A7 7 0 0 0 5 10c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+              <div><strong>Location</strong><span>Padmarao Nagar, Hyderabad, Telangana</span></div>
+            </li>
+          </ul>
+          <div class="map-embed" style="margin-top:20px;">
+            <iframe src="https://www.google.com/maps?q=Padmarao+Nagar,Hyderabad,Telangana&output=embed" loading="lazy" title="Wellness Hostel location — Padmarao Nagar, Hyderabad" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div>
+          <form class="contact-form" id="contactForm" data-endpoint="PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" required>
+            <label for="cf-number">Phone Number</label>
+            <input type="tel" id="cf-number" name="number" required>
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" required>
+            <label for="cf-message">Write to us</label>
+            <textarea id="cf-message" name="message" required></textarea>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit</button>
+            <p class="form-status" id="formStatus"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MINI ABOUT + CONTACT (repeat, per reference layout) -->
+  <section class="mini-info">
+    <div class="wrap">
+      <div class="mini-info-grid">
+        <div>
+          <h3>About</h3>
+          <p>Welcome to Wellness Hostel, where comfort and safety come first. Beautiful rooms, home-style food, and a community that still celebrates every festival together — all in a women-only PG built around student life.</p>
+          <div class="mini-brand"><span class="brand-mark" style="width:28px;height:28px;font-size:.95rem;">W</span> Wellness Hostel</div>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <address>
+            Wellness Hostel, Padmarao Nagar,<br>
+            Hyderabad, Telangana<br>
+            Mob: +91 93911 05359<br>
+            E-mail: hello@wellnesshostel.example
+          </address>
+          <a href="#contact" class="show-map-link">Show on map +</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Wellness Hostel</div>
+        <p style="font-size:.85rem;max-width:32ch;margin-top:8px;">Student PG accommodation — rooms, meals, WiFi, and a bit of home, all in one place.</p>
+      </div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;font-size:.88rem;">
+        <li><a href="#rooms">Rooms &amp; Pricing</a></li>
+        <li><a href="#amenities">Amenities</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <p class="footer-note">This is a working template — swap the room photos and confirm consent for any resident photos used before publishing. © Wellness Hostel.</p>
+  </div>
+</footer>
+
+<div class="call-tip" id="callTip">
+  <div>
+    <div style="font-size:.75rem;color:#7a8574;">Call our executive</div>
+    <strong id="callTipNumber">+91 93911 05359</strong>
+  </div>
+  <button id="callTipCopy" type="button">Copy number</button>
+  <button class="call-tip-close" id="callTipClose" type="button" aria-label="Close">✕</button>
+</div>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // ---- CALL BUTTON: detect laptop/desktop vs phone ----
+  // Phones/tablets have a coarse (touch) primary pointer; laptops/desktops have a fine (mouse) pointer.
+  document.querySelectorAll('.call-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const isLikelyPhone = window.matchMedia('(pointer: coarse)').matches;
+      if (!isLikelyPhone) {
+        e.preventDefault();
+        document.getElementById('callTipNumber').textContent = this.dataset.number || this.textContent;
+        const tip = document.getElementById('callTip');
+        tip.classList.add('show');
+        clearTimeout(window._callTipTimer);
+        window._callTipTimer = setTimeout(() => tip.classList.remove('show'), 7000);
+      }
+      // On phones, the tel: link proceeds normally and opens the dialer.
+    });
+  });
+  document.getElementById('callTipCopy').addEventListener('click', function () {
+    const num = document.getElementById('callTipNumber').textContent;
+    navigator.clipboard.writeText(num).then(() => {
+      this.textContent = 'Copied!';
+      setTimeout(() => (this.textContent = 'Copy number'), 1500);
+    });
+  });
+  document.getElementById('callTipClose').addEventListener('click', () => {
+    document.getElementById('callTip').classList.remove('show');
+  });
+
+  // ---- GALLERY SLIDER ----
+  function initSlider(root) {
+    const track = root.querySelector('.slider-track');
+    const slides = track.children;
+    const dotsWrap = root.parentElement.querySelector('.slider-dots');
+    let idx = 0;
+    Array.from(slides).forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    function update() {
+      track.style.transform = `translateX(-${idx * 100}%)`;
+      dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+    function goTo(i) {
+      idx = (i + slides.length) % slides.length;
+      update();
+    }
+    root.querySelector('.slider-prev').addEventListener('click', () => goTo(idx - 1));
+    root.querySelector('.slider-next').addEventListener('click', () => goTo(idx + 1));
+    let auto = setInterval(() => goTo(idx + 1), 4500);
+    root.addEventListener('mouseenter', () => clearInterval(auto));
+    root.addEventListener('mouseleave', () => (auto = setInterval(() => goTo(idx + 1), 4500)));
+  }
+  document.querySelectorAll('.slider').forEach(initSlider);
+
+  // ---- CONTACT FORM SUBMISSION ----
+  // Wire this to a Google Apps Script Web App URL (see setup instructions provided separately)
+  // to auto-save each submission to a Google Sheet and email-alert the owner.
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const statusEl = document.getElementById('formStatus');
+      const btn = contactForm.querySelector('button[type=submit]');
+      const endpoint = contactForm.dataset.endpoint;
+      if (!endpoint || endpoint.includes('PASTE_YOUR')) {
+        statusEl.textContent = 'Form not connected yet — see setup instructions to activate this.';
+        statusEl.className = 'form-status err';
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      const data = {
+        name: contactForm.name.value,
+        number: contactForm.number.value,
+        email: contactForm.email.value,
+        message: contactForm.message.value
+      };
+      try {
+        await fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(data)
+        });
+        statusEl.textContent = "Thanks! We've received your message and will reach out shortly.";
+        statusEl.className = 'form-status ok';
+        contactForm.reset();
+      } catch (err) {
+        statusEl.textContent = 'Something went wrong — please WhatsApp us instead.';
+        statusEl.className = 'form-status err';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Submit';
+    });
+  }
+</script>
+
+</body>
+</html>
