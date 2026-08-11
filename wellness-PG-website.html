@@ -184,7 +184,7 @@
     background:var(--white);border-radius:var(--radius);overflow:hidden;
     border:1px solid var(--line);box-shadow:var(--shadow);
   }
-  .room-card img{height:200px;object-fit:cover;}
+  .room-card img{width:100%;height:clamp(220px,28vh,360px);object-fit:cover;display:block;}
   .room-body{padding:24px;}
   .room-body h3{font-size:1.25rem;margin-bottom:.2em;}
   .price{font-family:'Fraunces',serif;font-size:1.9rem;color:var(--clay);margin:.2em 0 .1em;}
@@ -233,7 +233,7 @@
   /* ---------- CULTURE ---------- */
   .culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   .culture-card{border-radius:var(--radius);overflow:hidden;background:var(--white);border:1px solid var(--line);}
-  .culture-card img{height:190px;object-fit:cover;}
+  .culture-card img{width: 100%;height: 220px;object-fit: cover;object-position: center;display: block;}
   .culture-body{padding:20px;}
   .culture-body .eyebrow{margin-bottom:.3em;}
   .culture-body p{font-size:.9rem;color:#57624f;margin:0;}
@@ -300,9 +300,17 @@
   @media (max-width:700px){.slider-track .img-placeholder{height:280px;}}
 
   /* ---------- IMAGE SLIDER ---------- */
-  .slider{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+  .slider{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    max-width:980px;
+    margin:0 auto;
+  }
   .slider-track{display:flex;transition:transform .5s ease;}
-  .slider-track img{width:100%;flex:0 0 100%;height:440px;object-fit:cover;}
+  .slider-track > *{flex:0 0 100%;}
+  .slider-track img{width:100%;height:clamp(360px,45vh,720px);object-fit:cover;object-position:center;display:block;}
   .slider-caption{
     position:absolute;left:18px;bottom:44px;background:rgba(35,53,34,.78);color:var(--cream);
     padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600;
@@ -318,7 +326,10 @@
   .slider-dots{display:flex;gap:8px;justify-content:center;margin-top:16px;}
   .slider-dot{width:9px;height:9px;border-radius:50%;background:var(--line);border:none;cursor:pointer;padding:0;}
   .slider-dot.active{background:var(--clay);}
-  @media (max-width:700px){.slider-track img{height:280px;}}
+  @media (max-width:700px){
+    .slider{max-width:100%;}
+    .slider-track img{height:clamp(220px,32vh,360px);}
+  }
 
   /* ---------- FOOD SHOWCASE ---------- */
   .food-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px;}
@@ -412,7 +423,7 @@
         <p class="hero-sub">Wellness Hostel is safe, women-only student housing built for the daily grind — reliable WiFi for the 2am submission, a quiet workspace, food that shows up on time, and a home that still feels lived-in during Diwali and Ganesh Chaturthi.</p>
         <div class="hero-actions">
           <a href="#book" class="btn btn-primary">Book a visit</a>
-          <a href="https://wa.me/919391105359" class="btn btn-ghost">
+          <a href="https://wa.me/917729000888" class="btn btn-ghost">
             <svg class="wa-icon" viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.71 4.61 1.929 6.473L4.5 28.5l7.187-1.885A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3Zm6.98 16.61c-.29.82-1.44 1.5-2.36 1.7-.63.13-1.45.24-4.22-.9-3.54-1.46-5.82-5.06-6-5.3-.17-.24-1.44-1.92-1.44-3.66 0-1.74.9-2.6 1.23-2.95.29-.32.65-.4.87-.4.22 0 .43 0 .62.01.2.01.47-.08.73.56.29.68.97 2.36 1.06 2.53.09.17.15.37.03.6-.11.24-.17.38-.34.58-.17.2-.36.45-.51.6-.17.17-.35.35-.15.7.2.34.88 1.45 1.9 2.35 1.31 1.16 2.41 1.53 2.76 1.7.36.17.57.15.78-.09.21-.24.9-1.04 1.13-1.4.24-.35.48-.29.8-.17.32.11 2.02.95 2.37 1.13.34.17.57.26.65.4.09.15.09.85-.2 1.67Z"/></svg>
             Chat on WhatsApp
           </a>
@@ -426,11 +437,7 @@
         </div>
       </div>
       <div class="hero-photo">
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="8" cy="10" r="1.6"/><path d="m21 15-5-5-9 9"/></svg>
-          <span>Building exterior photo goes here</span>
-        </div>
-        <div class="hero-photo-badge">Add area / landmark here</div>
+        <img src="images/charminar.webp" alt="Building exterior — Charminar">
       </div>
     </div>
   </section>
@@ -472,7 +479,7 @@
         <div class="fact-card">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7l-9-5Z"/></svg>
           <h4>Safe &amp; supervised</h4>
-          <p>In-room lockers, power backup, and staff on-site — the details parents ask about first.</p>
+          <p>In-room lockers, reliable power backup, on-site staff, and 24/7 CCTV monitoring.</p>
         </div>
       </div>
     </div>
@@ -489,23 +496,16 @@
       <div class="slider reveal">
         <div class="slider-track">
           <div style="position:relative;">
-            <div class="img-placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-              <span>Room interior photo goes here</span>
-            </div>
-            <span class="slider-caption">Rooms — add real photo</span>
-          </div>
-          <div style="position:relative;">
-            <img src="images/study-workspace.jpg" alt="Study workspace with desks and shelves">
-            <span class="slider-caption">Study Workspace</span>
-          </div>
-          <div style="position:relative;">
-            <img src="images/gym.jpg" alt="In-house gym">
+            <img src="images/gym-dummy.webp" alt="In-house gym">
             <span class="slider-caption">Gym</span>
           </div>
           <div style="position:relative;">
-            <img src="images/dining-area.jpg" alt="Dining area">
+            <img src="images/dining-dummy.webp" alt="Dining area">
             <span class="slider-caption">Dining Area</span>
+          </div>
+          <div style="position:relative;">
+            <img src="images/studyhall-dummy.webp" alt="Study workspace with desks and shelves">
+            <span class="slider-caption">Study Workspace</span>
           </div>
         </div>
         <button class="slider-nav slider-prev" aria-label="Previous slide">
@@ -529,10 +529,7 @@
       </div>
       <div class="rooms-grid reveal">
         <div class="room-card">
-          <div class="img-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-            <span>AC room photo goes here</span>
-          </div>
+          <img src="images/AC%202-sharing.webp" alt="AC room">
           <div class="room-body">
             <h3>AC Room</h3>
             <ul class="room-feats">
@@ -541,14 +538,11 @@
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Attached / shared washroom</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> High-speed WiFi included</li>
             </ul>
-            <a href="https://wa.me/919391105359" class="btn btn-ghost" style="margin-top:16px;padding:10px 20px;font-size:.85rem;">Ask about rates</a>
+            <a href="https://wa.me/917729000888" class="btn btn-ghost" style="margin-top:16px;padding:10px 20px;font-size:.85rem;">Ask about rates</a>
           </div>
         </div>
         <div class="room-card">
-          <div class="img-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-            <span>Non-AC room photo goes here</span>
-          </div>
+          <img src="images/Non%20AC%202-sharing.webp" alt="Non-AC room">
           <div class="room-body">
             <h3>Non-AC Room</h3>
             <ul class="room-feats">
@@ -557,7 +551,7 @@
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Attached / shared washroom</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> High-speed WiFi included</li>
             </ul>
-            <a href="https://wa.me/919391105359" class="btn btn-ghost" style="margin-top:16px;padding:10px 20px;font-size:.85rem;">Ask about rates</a>
+            <a href="https://wa.me/917729000888" class="btn btn-ghost" style="margin-top:16px;padding:10px 20px;font-size:.85rem;">Ask about rates</a>
           </div>
         </div>
       </div>
@@ -572,13 +566,13 @@
         <h2>Meals made to actually keep you going</h2>
       </div>
       <div class="reveal" style="margin-bottom:36px;">
-        <img src="images/food-thali.jpg" alt="Wholesome thali meal served at Wellness Hostel" style="width:100%;max-height:460px;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow);">
+        <img src="images/Food.webp" alt="Wholesome thali meal served at Wellness Hostel" style="width:100%;max-height:460px;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow);">
       </div>
       <div class="food-caption reveal">"We provide delicious, healthy food three times a day, along with evening snacks."</div>
       <div class="delivery-box reveal" style="margin-top:40px;">
         <h3>Meals delivered to your institute</h3>
         <p>Save your time to focus on studies — we bring your meals directly to your institute. Just let the mess in-charge know a day ahead.</p>
-        <a href="https://wa.me/919391105359" class="btn btn-gold" style="margin-top:8px;">Ask about delivery</a>
+        <a href="https://wa.me/917729000888" class="btn btn-gold" style="margin-top:8px;">Ask about delivery</a>
       </div>
     </div>
   </section>
@@ -587,7 +581,7 @@
   <section>
     <div class="wrap">
       <div class="study-block reveal">
-        <img src="images/study-workspace.jpg" alt="Study workspace with desks and shelves">
+        <img src="images/studyhall-dummy.webp" alt="Study workspace with desks and shelves">
         <div>
           <span class="eyebrow">Workspace</span>
           <h2>A study room that's actually quiet</h2>
@@ -635,21 +629,21 @@
       </div>
       <div class="culture-grid reveal">
         <div class="culture-card">
-          <img src="images/ganesh-chaturthi.jpg" alt="Residents celebrating Ganesh Chaturthi at Wellness Hostel">
+          <img src="images/ganesh-chaturthi.webp" alt="Residents celebrating Ganesh Chaturthi at Wellness Hostel">
           <div class="culture-body">
             <span class="eyebrow">Ganesh Chaturthi</span>
             <p>The common room turns into a small pandal every year — residents pitch in for decorations and modaks, then walk the visarjan together.</p>
           </div>
         </div>
         <div class="culture-card">
-          <img src="images/diwali.jpg" alt="Residents celebrating Diwali with diyas and rangoli at Wellness Hostel">
+          <img src="images/diwali.webp" alt="Residents celebrating Diwali with diyas and rangoli at Wellness Hostel">
           <div class="culture-body">
             <span class="eyebrow">Diwali</span>
             <p>Diyas along every corridor, a shared dinner, and a night that makes being away from home feel a little less far.</p>
           </div>
         </div>
         <div class="culture-card">
-          <img src="images/sankranti.jpg" alt="Residents celebrating Sankranti at Wellness Hostel">
+          <img src="images/sankranthi.webp" alt="Residents celebrating Sankranti at Wellness Hostel">
           <div class="culture-body">
             <span class="eyebrow">Sankranti &amp; more</span>
             <p>From kite flying on the terrace to festive get-togethers through the year — the celebrations here don't stop just because home is a little farther away.</p>
@@ -682,11 +676,11 @@
         <h2>See the rooms before you decide</h2>
         <p>Slots are booked through our executive — no online payment needed to visit. Just reach out and we'll lock in a time that works.</p>
         <div class="cta-actions">
-          <a href="https://wa.me/919391105359" class="btn btn-gold">
+          <a href="https://wa.me/917729000888" class="btn btn-gold">
             <svg class="wa-icon" viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.71 4.61 1.929 6.473L4.5 28.5l7.187-1.885A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3Zm6.98 16.61c-.29.82-1.44 1.5-2.36 1.7-.63.13-1.45.24-4.22-.9-3.54-1.46-5.82-5.06-6-5.3-.17-.24-1.44-1.92-1.44-3.66 0-1.74.9-2.6 1.23-2.95.29-.32.65-.4.87-.4.22 0 .43 0 .62.01.2.01.47-.08.73.56.29.68.97 2.36 1.06 2.53.09.17.15.37.03.6-.11.24-.17.38-.34.58-.17.2-.36.45-.51.6-.17.17-.35.35-.15.7.2.34.88 1.45 1.9 2.35 1.31 1.16 2.41 1.53 2.76 1.7.36.17.57.15.78-.09.21-.24.9-1.04 1.13-1.4.24-.35.48-.29.8-.17.32.11 2.02.95 2.37 1.13.34.17.57.26.65.4.09.15.09.85-.2 1.67Z"/></svg>
             WhatsApp us to book
           </a>
-          <a href="tel:+919391105359" class="btn btn-ghost call-link" data-number="+91 93911 05359" style="border-color:var(--cream);color:var(--cream);">Call our executive</a>
+          <a href="tel:+917729000888" class="btn btn-ghost call-link" data-number="+91 77290 00888" style="border-color:var(--cream);color:var(--cream);">Call our executive</a>
         </div>
       </div>
     </div>
@@ -704,11 +698,11 @@
           <ul class="contact-list">
             <li>
               <span class="ico-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v10Z"/></svg></span>
-              <div><strong>WhatsApp</strong><span>+91 93911 05359 — fastest way to reach us</span></div>
+              <div><strong>WhatsApp</strong><span>+91 77290 00888 — fastest way to reach us</span></div>
             </li>
             <li>
               <span class="ico-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5Z"/></svg></span>
-              <div><strong>Phone</strong><span>+91 93911 05359</span></div>
+              <div><strong>Phone</strong><span>+91 77290 00888</span></div>
             </li>
             <li>
               <span class="ico-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
@@ -716,15 +710,15 @@
             </li>
             <li>
               <span class="ico-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12A7 7 0 0 0 5 10c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
-              <div><strong>Location</strong><span>Padmarao Nagar, Hyderabad, Telangana</span></div>
+              <div><strong>Location</strong><span>6-1-285/5, Venkatapuram Colony, Padmarao Nagar, Hyderabad, Telangana 500025</span></div>
             </li>
           </ul>
           <div class="map-embed" style="margin-top:20px;">
-            <iframe src="https://www.google.com/maps?q=Padmarao+Nagar,Hyderabad,Telangana&output=embed" loading="lazy" title="Wellness Hostel location — Padmarao Nagar, Hyderabad" allowfullscreen></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d588.0590071746129!2d78.50580738620513!3d17.42567820855679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb998904a3add7%3A0x4299c9624f950de0!2s6%2F1%2F285%2F3%2C%206%2F1%2F286%2F3%2C%20Venkatapuram%20Colony%2C%20MIGH%20Colony%2C%20Walker%20Town%2C%20Padmarao%20Nagar%2C%20Hyderabad%2C%20Secunderabad%2C%20Telangana%20500020!5e1!3m2!1sen!2sin!4v1786449805881!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
         </div>
         <div>
-          <form class="contact-form" id="contactForm" data-endpoint="PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE">
+          <form class="contact-form" id="contactForm" data-endpoint="https://script.google.com/macros/s/AKfycbyqHOyZ51jc7jQHq-bGZ26DqsvIE-_C32AGQ9lGTu9Di1ROr5Zuno2h7yo8e3_ejvx1/exec">
             <label for="cf-name">Name</label>
             <input type="text" id="cf-name" name="name" required>
             <label for="cf-number">Phone Number</label>
@@ -732,7 +726,7 @@
             <label for="cf-email">Email</label>
             <input type="email" id="cf-email" name="email" required>
             <label for="cf-message">Write to us</label>
-            <textarea id="cf-message" name="message" required></textarea>
+            <textarea id="cf-message" name="message" ></textarea>
             <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit</button>
             <p class="form-status" id="formStatus"></p>
           </form>
@@ -753,9 +747,10 @@
         <div>
           <h3>Contact</h3>
           <address>
-            Wellness Hostel, Padmarao Nagar,<br>
-            Hyderabad, Telangana<br>
-            Mob: +91 93911 05359<br>
+            Wellness Hostel<br>
+            6-1-285/5 Venkatapuram Colony,<br>
+            Padmarao Nagar, Hyderabad, Telangana 500025<br>
+            Mob: +91 77290 00888<br>
             E-mail: hello@wellnesshostel.example
           </address>
           <a href="#contact" class="show-map-link">Show on map +</a>
@@ -786,7 +781,7 @@
 <div class="call-tip" id="callTip">
   <div>
     <div style="font-size:.75rem;color:#7a8574;">Call our executive</div>
-    <strong id="callTipNumber">+91 93911 05359</strong>
+    <strong id="callTipNumber">+91 77290 00888</strong>
   </div>
   <button id="callTipCopy" type="button">Copy number</button>
   <button class="call-tip-close" id="callTipClose" type="button" aria-label="Close">✕</button>
